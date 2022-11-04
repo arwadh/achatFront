@@ -5,10 +5,12 @@ pipeline {
     
   stages {
         
-   stage('Checkout SCM') {
-        git branch: 'product',
+    stage('Git') {
+      steps {
+           echo ('Getting project from git');
+          git branch: 'product',
          url:'https://github.com/arwadh/achatFront.git'
-       
+      }
     }
      
     stage('Build') {
