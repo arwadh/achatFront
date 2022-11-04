@@ -1,24 +1,28 @@
-node {
-    stage('Checkout SCM') {
-        git branch: 'product', url:'https://github.com/arwadh/achatFront.git'
-       
-    }
-
-    stage('NPM Install node modules') {
-       
-            sh 'npm install'
+pipeline {
+  agent any
+    
+  tools {nodejs "node"}
+    
+  stages {
         
+   stage('Checkout SCM') {
+        git branch: 'product',
+         url:'https://github.com/arwadh/achatFront.git'
+       
     }
-
+     
     stage('Build') {
-        sh 'npm run build:ssr '
+      steps {
+        sh 'npm install'
+         sh '<<Build Command>>'
+      }
+    }  
+    
+            
+    stage('Test') {
+      steps {
+        sh 'node test'
+      }
     }
-
-    stage('Deploy') {
-        sh 'pm2 restart all '
-    }
-
-
-
-  
+  }
 }
