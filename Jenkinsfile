@@ -14,7 +14,7 @@ pipeline {
     }
       stage('cache clean') {
       steps {
-        sh 'npm cache clean'
+        sh 'npm cache clean --force'
          sh '<<Build Command>>'
       }
     } 
